@@ -4,7 +4,7 @@
 dataset:
   common:
     NAME: ScanObjectNNHardest
-    data_dir: './data/ScanObjectNN/h5_files/main_split'
+    data_dir: './data/ScanObjectNN/main_split'
   train:
     split: train
   val:
