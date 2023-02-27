@@ -7,12 +7,21 @@ cmd='bash scripts/scanobjectnn/enhance_surf_v3_k8_weighted.sh'
 # cmd='python -m models.enhance_surf_v1'
 # cmd="conda list | grep torch"
 
+# docker run -it --runtime=nvidia --ipc=host \
+#   --env CUDA_VISIBLE_DEVICES=2 \
+#   --rm \
+#   -u $(id -u):$(id -g) \
+#   -p 8022:22 \
+#   -v ${coderoot}:${docker_coderoot} \
+#   -v ${coderoot}/log:${docker_coderoot}/log \
+#   -v ${dataroot}:${docker_coderoot}/data \
+#   jamekuma/pointnext_cls:latest
+
 docker run -it --runtime=nvidia --ipc=host \
   --env CUDA_VISIBLE_DEVICES=2 \
   --rm \
   -u $(id -u):$(id -g) \
-  -p 8022:22 \
   -v ${coderoot}:${docker_coderoot} \
-  -v ${coderoot}/log:${docker_coderoot}/log \
-  -v ${dataroot}:${docker_coderoot}/data \
+  -v ${coderoot}/log:/mnt/output/logs \
+  -v ${dataroot}:/mnt/input/data \
   jamekuma/pointnext_cls:latest

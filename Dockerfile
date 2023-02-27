@@ -4,7 +4,8 @@ ARG CUDNN="8"
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 ENV CUDA_HOME="/usr/local/cuda"
 ENV FORCE_CUDA="1"
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip config set global.index-url http://pypi.mirrors.ustc.edu.cn/simple/
+RUN pip config set global.trusted-host pypi.mirrors.ustc.edu.cn
 RUN apt-get update && apt-get install -y \
     ninja-build \
     libcublas-dev-11-6 \
@@ -34,6 +35,10 @@ RUN python setup.py install
 COPY ./openpoints/cpp/chamfer_dist /env/chamfer_dist
 WORKDIR /env/chamfer_dist
 RUN python setup.py install
+
+COPY ./openpoints/cpp/pointops_repsurf /env/pointops_repsurf
+WORKDIR /env/pointops_repsurf
+RUN python3 setup.py install
 
 # COPY ./openpoints/cpp/emd /env/emd
 # WORKDIR /env/emd
