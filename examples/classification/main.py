@@ -3,6 +3,7 @@ import os, argparse, yaml, numpy as np
 from torch import multiprocessing as mp
 from examples.classification.train import main as train
 from examples.classification.pretrain import main as pretrain
+from examples.classification.train_move_loss import main as train_move_loss 
 from openpoints.utils import EasyConfig, dist_utils, find_free_port, generate_exp_directory, resume_exp_directory, Wandb
 
 
@@ -55,7 +56,10 @@ if __name__ == "__main__":
     if cfg.mode == 'pretrain':
         main = pretrain
     else:
-        main = train
+        if 'resampling' in cfg.model.NAME.lower():
+            main = train_move_loss
+        else:
+            main = train
 
     # multi processing.
     if cfg.mp:

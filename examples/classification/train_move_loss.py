@@ -167,7 +167,7 @@ def main(gpu, cfg, profile=False):
             train_loader.sampler.set_epoch(epoch)
         if hasattr(train_loader.dataset, 'epoch'):
             train_loader.dataset.epoch = epoch - 1
-        train_loss, train_macc, train_oa, _, _ = \
+        train_loss, move_loss, train_macc, train_oa, _, _ = \
             train_one_epoch(model, train_loader,
                             optimizer, scheduler, epoch, cfg)
 
@@ -188,6 +188,7 @@ def main(gpu, cfg, profile=False):
                      f'train_oa {train_oa:.2f}, val_oa {val_oa:.2f}, best val oa {best_val:.2f}')
         if writer is not None:
             writer.add_scalar('train_loss', train_loss, epoch)
+            writer.add_scalar('move_loss', move_loss, epoch)
             writer.add_scalar('train_oa', train_macc, epoch)
             writer.add_scalar('lr', lr, epoch)
             writer.add_scalar('val_oa', val_oa, epoch)
@@ -224,6 +225,7 @@ def main(gpu, cfg, profile=False):
 
 def train_one_epoch(model, train_loader, optimizer, scheduler, epoch, cfg):
     loss_meter = AverageMeter()
+    move_loss_meter = AverageMeter()
     cm = ConfusionMatrix(num_classes=cfg.num_classes)
     npoints = cfg.num_points
 
@@ -261,7 +263,7 @@ def train_one_epoch(model, train_loader, optimizer, scheduler, epoch, cfg):
 
         data['pos'] = points[:, :, :3].contiguous()
         data['x'] = points[:, :, :cfg.model.in_channels].transpose(1, 2).contiguous()
-        logits, loss = model.get_logits_loss(data, target) if not hasattr(model, 'module') else model.module.get_logits_loss(data, target)
+        logits, loss, move_loss = model.get_logits_loss(data, target) if not hasattr(model, 'module') else model.module.get_logits_loss(data, target)
         loss.backward()
 
         # optimize
@@ -278,11 +280,12 @@ def train_one_epoch(model, train_loader, optimizer, scheduler, epoch, cfg):
         # update confusion matrix
         cm.update(logits.argmax(dim=1), target)
         loss_meter.update(loss.item())
+        move_loss_meter.update(move_loss.item())
         if idx % cfg.print_freq == 0:
             pbar.set_description(f"Train Epoch [{epoch}/{cfg.epochs}] "
                                  f"Loss {loss_meter.val:.3f} Acc {cm.overall_accuray:.2f}")
     macc, overallacc, accs = cm.all_acc()
-    return loss_meter.avg, macc, overallacc, accs, cm
+    return loss_meter.avg, move_loss_meter.avg, macc, overallacc, accs, cm
 
 
 @torch.no_grad()

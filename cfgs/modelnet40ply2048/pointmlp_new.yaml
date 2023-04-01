@@ -1,5 +1,3 @@
-# GFLOPs  GMACs   Params.(M)
-#  31.36   15.61   13.239
 model:
   NAME: BaseCls
   encoder_args:

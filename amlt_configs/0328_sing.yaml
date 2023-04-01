@@ -21,18 +21,26 @@ code:
 
 jobs:
 
-# - name: 0222_pointnext
+# - name: 0321_pointnext_resampling
 #   sku: G1
 #   preemptible: False
   priority: High
   # azml_int: True
 #   command:
-#   - bash my_scripts/0222_pointnext.sh
+#   - bash my_scripts/0321_pointnext_resampling.sh
 
-- name: 0222_pointnext_repsurf
+- name: scanobjnn/0328_pointmlp
   sku: G1
   preemptible: False
   priority: High
   # azml_int: True
   command:
-  - bash my_scripts/0222_pointnext_repsurf.sh
+  - bash my_scripts/scanobjnn/0328_pointmlp.sh
+
+- name: scanobjnn/0328_pointmlp_resampling_before_group
+  sku: G1
+  preemptible: False
+  priority: High
+  # azml_int: True
+  command:
+  - bash my_scripts/scanobjnn/0328_pointmlp_resampling_before_group.sh

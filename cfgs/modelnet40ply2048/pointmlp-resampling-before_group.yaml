@@ -1,9 +1,9 @@
 # GFLOPs  GMACs   Params.(M)
 #  31.36   15.61   13.239
 model:
-  NAME: BaseCls
+  NAME: BaseCls_Resampling
   encoder_args:
-    NAME: PointMLP
+    NAME: PointMLP_Resampling
     in_channels: 3
     points: 1024
     num_classes: 40

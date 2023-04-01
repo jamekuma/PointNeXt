@@ -21,18 +21,10 @@ code:
 
 jobs:
 
-# - name: 0222_pointnext
-#   sku: G1
-#   preemptible: False
-  priority: High
-  # azml_int: True
-#   command:
-#   - bash my_scripts/0222_pointnext.sh
-
-- name: 0222_pointnext_repsurf
+- name: 0228_pointnext_enhancesurf
   sku: G1
   preemptible: False
   priority: High
   # azml_int: True
   command:
-  - bash my_scripts/0222_pointnext_repsurf.sh
+  - bash my_scripts/0228_pointnext_enhancesurf.sh
