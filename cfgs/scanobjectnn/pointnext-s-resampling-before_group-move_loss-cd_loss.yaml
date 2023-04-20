@@ -1,10 +1,6 @@
-# GFLOPs  GMACs   Params.(M)
-#  1.64    0.81    1.374
-
-# C=64
-# GFLOPs  GMACs   Params.(M)
-#  6.49    3.23    4.523
-# Throughput (ins./s): 2032.9397323777052
+# FLOPs	GMACs	Params.(M)
+#  1.64	 0.81	 1.367
+# 2040.039810480711
 
 model:
   NAME: BaseCls_Resampling
@@ -13,11 +9,11 @@ model:
     blocks: [1, 1, 1, 1, 1, 1]
     strides: [1, 2, 2, 2, 2, 1]
     width: 32
-    in_channels: 3 
-    radius: 0.15
-    radius_scaling: 1.5
+    in_channels: 4
     sa_layers: 2
     sa_use_res: True
+    radius: 0.15
+    radius_scaling: 1.5
     nsample: 32
     expansion: 4
     aggr_args:
@@ -35,9 +31,10 @@ model:
     resampler_args:
       NAME: Resampler
       move_loss_coef: 0.002
+      cd_loss_coef: 1
   cls_args: 
     NAME: ClsHead
-    num_classes: 40
+    num_classes: 15
     mlps: [512, 256]
     norm_args: 
       norm: 'bn1d'

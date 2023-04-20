@@ -19,6 +19,8 @@ model:
     pos_blocks: [ 2, 2, 2, 2 ]
     k_neighbors: [ 24, 24, 24, 24 ]
     reducers: [ 2, 2, 2, 2 ]
+    resampler_args:
+      NAME: Resampler
 
 lr:
   0.1

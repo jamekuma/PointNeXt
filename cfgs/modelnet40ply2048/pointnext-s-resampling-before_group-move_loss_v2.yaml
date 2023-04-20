@@ -33,7 +33,7 @@ model:
     norm_args:
       norm: 'bn'
     resampler_args:
-      NAME: Resampler
+      NAME: Resampler_v2
       move_loss_coef: 0.002
   cls_args: 
     NAME: ClsHead

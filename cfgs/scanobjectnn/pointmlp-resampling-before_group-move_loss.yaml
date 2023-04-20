@@ -4,7 +4,6 @@
 
 model:
   NAME: BaseCls_Resampling
-  move_loss_coef: 0.002
   encoder_args:
     NAME: PointMLPEncoder_Resampling
     in_channels: 4
@@ -20,6 +19,9 @@ model:
     pos_blocks: [ 2, 2, 2, 2 ]
     k_neighbors: [ 24, 24, 24, 24 ]
     reducers: [ 2, 2, 2, 2 ]
+    resampler_args:
+      NAME: Resampler
+      move_loss_coef: 0.002
   cls_args:
     NAME: ClsHead
     num_classes: 15

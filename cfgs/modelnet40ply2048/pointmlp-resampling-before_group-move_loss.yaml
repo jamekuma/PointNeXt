@@ -2,7 +2,6 @@
 #  31.36   15.61   13.239
 model:
   NAME: BaseCls_Resampling
-  move_loss_coef: 0.002
   encoder_args:
     NAME: PointMLP_Resampling
     in_channels: 3
@@ -20,6 +19,9 @@ model:
     pos_blocks: [ 2, 2, 2, 2 ]
     k_neighbors: [ 24, 24, 24, 24 ]
     reducers: [ 2, 2, 2, 2 ]
+    resampler_args:
+      NAME: Resampler
+      move_loss_coef: 0.002
 
 lr:
   0.1
