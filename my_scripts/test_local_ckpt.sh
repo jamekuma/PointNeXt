@@ -1,4 +1,4 @@
-GPUs="0"
+GPUs=${1:-'0'}
 # ckpt_path = "azure_log/scanobjectnn-train-pointnext-s-resampling-before_group-ngpus1-seed3125-20230331-132635-9aZoaWegpVgmCLuFzwNKTJ-9500/checkpoint/scanobjectnn-train-pointnext-s-resampling-before_group-ngpus1-seed3125-20230331-132635-9aZoaWegpVgmCLuFzwNKTJ-9500_ckpt_best.pth"
 # ckpt_path="azure_log/scanobjectnn-train-pointnext-s-resampling-before_group-move_loss-ngpus1-seed3125-20230331-132632-5AebU88SXWpVq9VPrR6aFT-9500/checkpoint/scanobjectnn-train-pointnext-s-resampling-before_group-move_loss-ngpus1-seed3125-20230331-132632-5AebU88SXWpVq9VPrR6aFT-9500_ckpt_best.pth"
 

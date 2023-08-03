@@ -1,4 +1,4 @@
-GPUs="0"
+GPUs=${1:-'0'}
 task_folder="classification"
 
 

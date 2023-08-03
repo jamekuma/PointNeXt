@@ -1,9 +1,8 @@
-dataroot=/mnt/yuxgu/v-jixiong/datasets
-coderoot=/home/jixiong/mine/PointNeXt
+dataroot=/data3/xiongjianyu/datasets
+coderoot=/data3/xiongjianyu/research/PointNeXt
 docker_coderoot=/workspace
 # cmd='bash scripts/scanobjectnn/repsurf_ssg_umb.sh'
 # cmd='bash scripts/modelnet40/repsurf_ssg_umb.sh'
-cmd='bash scripts/scanobjectnn/enhance_surf_v3_k8_weighted.sh'
 # cmd='python -m models.enhance_surf_v1'
 # cmd="conda list | grep torch"
 
@@ -17,7 +16,7 @@ cmd='bash scripts/scanobjectnn/enhance_surf_v3_k8_weighted.sh'
 #   -v ${dataroot}:${docker_coderoot}/data \
 #   jamekuma/pointnext_cls:latest
 
-docker run -it --runtime=nvidia --ipc=host \
+docker run -it --gpus all --ipc=host \
   --env CUDA_VISIBLE_DEVICES=2 \
   --rm \
   -u $(id -u):$(id -g) \
