@@ -23,8 +23,9 @@ if __name__ == "__main__":
     cfg.sync_bn = cfg.world_size > 1
 
     # init log dir
-    cfg.task_name = args.cfg.split('.')[-2].split('/')[-2]
-    cfg.exp_name = args.cfg.split('.')[-2].split('/')[-1]
+    base_name = os.path.splitext(args.cfg)[-2]
+    cfg.task_name = base_name.split('/')[-2]
+    cfg.exp_name = base_name.split('/')[-1]
     tags = [
         cfg.task_name,  # task name (the folder of name under ./cfgs
         cfg.mode,
